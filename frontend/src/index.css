@@ -1,0 +1,50 @@
+/* index.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans antialiased;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-200/10 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-deep-blue-500/40 rounded-full hover:bg-deep-blue-500/60 transition-colors;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-premium {
+    background: linear-gradient(135deg, #0B1F3A 0%, #1E3A8A 100%);
+  }
+  
+  .bg-gradient-premium-hover {
+    background: linear-gradient(135deg, #1E3A8A 0%, #2B4AB0 100%);
+  }
+  
+  .bg-gradient-accent {
+    background: linear-gradient(135deg, #1E3A8A 0%, #334155 100%);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, #1E3A8A 0%, #334155 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .card-premium {
+    @apply bg-bg-card border border-slate-200/10 shadow-premium;
+  }
+}
