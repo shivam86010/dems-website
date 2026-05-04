@@ -68,56 +68,8 @@ export const LoginForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Role Selector */}
-      <div className="flex gap-2 p-1 bg-navy/30 rounded-xl">
-        {['Police', 'Judge', 'Investigator', 'Command'].map((role, idx) => (
-          <button
-            key={role}
-            type="button"
-            className="flex-1 py-1.5 text-xs font-medium rounded-md text-bg-card/60 hover:text-bg-card transition-all hover:bg-bg-card/5"
-          >
-            {role}
-          </button>
-        ))}
-      </div>
-
-      {/* Social Media Login Options */}
-      <div className="space-y-4">
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { provider: 'google', Icon: GoogleIcon, label: 'Google' },
-            { provider: 'facebook', Icon: FacebookIcon, label: 'Facebook' },
-            { provider: 'twitter', Icon: TwitterIcon, label: 'X' },
-          ].map(({ provider, Icon, label }) => (
-            <button
-              key={provider}
-              type="button"
-              onClick={() => handleSocialLogin(provider as any)}
-              disabled={isSocialLoading !== null}
-              className="group relative flex items-center justify-center gap-2 py-2.5 rounded-xl bg-bg-card/5 border border-bg-card/10 hover:border-deep-blue/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden hover:scale-105 active:scale-95"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-bg-card/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              {isSocialLoading === provider ? (
-                <div className="w-4 h-4 border-2 border-bg-card/30 border-t-bg-card rounded-full animate-spin" />
-              ) : (
-                <>
-                  <Icon className="w-4 h-4" />
-                  <span className="text-xs font-medium text-bg-card/70 group-hover:text-bg-card">{label}</span>
-                </>
-              )}
-            </button>
-          ))}
-        </div>
-
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-bg-card/10"></div>
-          </div>
-          <div className="relative flex justify-center text-xs">
-            <span className="px-3 bg-transparent text-bg-card/40 font-medium">Or continue with email</span>
-          </div>
-        </div>
-      </div>
+    
+      
 
       {/* Email Field */}
       <div className="space-y-2">
@@ -225,18 +177,49 @@ export const LoginForm: React.FC = () => {
         )}
       </button>
 
-      {/* Security Badge */}
-      <div className="flex items-center justify-center gap-2 pt-2">
-        <Shield className="w-3 h-3 text-success" />
-        <span className="text-xs text-bg-card/40">End-to-end encrypted | SOC 2 compliant | 24/7 Monitoring</span>
+
+      {/* Social Media Login Options */}
+      <div className="space-y-4">
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-bg-card/10"></div>
+          </div>
+          <div className="relative flex justify-center text-xs">
+            <span className="px-3 bg-transparent text-bg-card/40 font-medium">Or continue with email</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { provider: 'google', Icon: GoogleIcon, label: 'Google' },
+            { provider: 'facebook', Icon: FacebookIcon, label: 'Facebook' },
+            { provider: 'twitter', Icon: TwitterIcon, label: 'X' },
+          ].map(({ provider, Icon, label }) => (
+            <button
+              key={provider}
+              type="button"
+              onClick={() => handleSocialLogin(provider as any)}
+              disabled={isSocialLoading !== null}
+              className="group relative flex items-center justify-center gap-2 py-2.5 rounded-xl bg-bg-card/5 border border-bg-card/10 hover:border-deep-blue/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden hover:scale-105 active:scale-95"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-bg-card/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              {isSocialLoading === provider ? (
+                <div className="w-4 h-4 border-2 border-bg-card/30 border-t-bg-card rounded-full animate-spin" />
+              ) : (
+                <>
+                  <Icon className="w-4 h-4" />
+                  <span className="text-xs font-medium text-bg-card/70 group-hover:text-bg-card">{label}</span>
+                </>
+              )}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Demo Credentials */}
-      <div className="pt-2 text-center">
-        <p className="text-[11px] text-bg-card/30 font-mono">
-          Demo: admin@dems.com / Admin123!
-        </p>
-      </div>
+      
+      
+
+     
+     
     </form>
   );
 };
