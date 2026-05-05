@@ -41,27 +41,45 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed }) => {
   const sidebarRef = useRef<HTMLElement>(null);
 
   const menuItems: MenuItem[] = [
-    { icon: <LayoutDashboard size={20} />, label: 'Dashboard', href: '/dashboard' },
-    { icon: <FileText size={20} />, label: 'Cases', href: '/cases', badge: 12 },
-    { 
-      icon: <FolderKanban size={20} />, 
-      label: 'Evidence', 
-      href: '/evidence',
-      subItems: [
-        { label: 'Images', href: '/evidence/images' },
-        { label: 'Videos', href: '/evidence/videos' },
-        { label: 'Documents', href: '/evidence/documents' },
-        { label: 'CCTV Footage', href: '/evidence/cctv' },
-      ]
+    {
+      icon: <LayoutDashboard size={20} />,
+      label: "Dashboard",
+      href: "/dashboard",
     },
-    { icon: <Users size={20} />, label: 'Officers', href: '/officers' },
-    { icon: <Scale size={20} />, label: 'Courts', href: '/courts', badge: 3 },
-    { icon: <Search size={20} />, label: 'Investigations', href: '/investigations' },
-    { icon: <Activity size={20} />, label: 'Real-time Updates', href: '/realtime', badge: 7 },
-    { icon: <BarChart3 size={20} />, label: 'Analytics', href: '/analytics' },
-    { icon: <Database size={20} />, label: 'Database', href: '/database' },
-    { icon: <Bell size={20} />, label: 'Alerts', href: '/alerts', badge: 5 },
-    { icon: <Settings size={20} />, label: 'Settings', href: '/settings' },
+    {
+      icon: <FileText size={20} />,
+      label: "Cases",
+      href: "/dashboard/case",
+      badge: 12,
+    },
+    {
+      icon: <FolderKanban size={20} />,
+      label: "Evidence",
+      href: "/evidence",
+      subItems: [
+        { label: "Images", href: "/evidence/images" },
+        { label: "Videos", href: "/evidence/videos" },
+        { label: "Documents", href: "/evidence/documents" },
+        { label: "CCTV Footage", href: "/evidence/cctv" },
+      ],
+    },
+    { icon: <Users size={20} />, label: "Officers", href: "/officers" },
+    { icon: <Scale size={20} />, label: "Courts", href: "/courts", badge: 3 },
+    {
+      icon: <Search size={20} />,
+      label: "Investigations",
+      href: "/investigations",
+    },
+    {
+      icon: <Activity size={20} />,
+      label: "Real-time Updates",
+      href: "/realtime",
+      badge: 7,
+    },
+    { icon: <BarChart3 size={20} />, label: "Analytics", href: "/analytics" },
+    { icon: <Database size={20} />, label: "Database", href: "/database" },
+    { icon: <Bell size={20} />, label: "Alerts", href: "/alerts", badge: 5 },
+    { icon: <Settings size={20} />, label: "Settings", href: "/settings" },
   ];
 
   // Auto-expand menu based on current route
