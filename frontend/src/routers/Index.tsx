@@ -1,18 +1,38 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "../pages/Login"; 
 import DashboardLayout from '../layout/Index'
+import NotFound from "../pages/NotFound";
+import Case from '../pages/Cases'
+import CaseDashboard from '../pages/CaseDashboard'
+
 const Index = () => {
+  const isAuthenticated = true; // replace with real auth logic
+
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      
+      {/* Root Route */}
+      <Route 
+        path="/" 
+        element={
+          isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />
+        } 
+      />
 
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          
-        </Route>
+      {/* Dashboard Routes */}
+      <Route 
+        path="/dashboard" 
+        element={
+          isAuthenticated ? <DashboardLayout /> : <Navigate to="/" replace />
+        }
+      >
+        <Route path="create-evidence" element={<Case />} />
+        <Route path="case-dashboard" element={<CaseDashboard />} />
+      </Route>
+
+      {/* 404 */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
 
-export default Index
+export default Index;
