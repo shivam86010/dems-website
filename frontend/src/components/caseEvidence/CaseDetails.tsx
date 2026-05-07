@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { X, FileText, Image, Video, Download, Eye, Clock, User, Tag, Shield, Lock, Unlock, Hash, Calendar, Briefcase, AlertTriangle } from 'lucide-react';
 import UploadEvidenceModal from './UploadEvidenceModal';
+import { useNavigate } from 'react-router-dom';
 
 interface CaseDetailsProps {
   case: any;
@@ -9,6 +10,8 @@ interface CaseDetailsProps {
 }
 
 const CaseDetails: React.FC<CaseDetailsProps> = ({ case: caseData, onClose }) => {
+  const navigate = useNavigate(); 
+
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'evidence' | 'timeline'>('overview');
 
@@ -180,9 +183,16 @@ const CaseDetails: React.FC<CaseDetailsProps> = ({ case: caseData, onClose }) =>
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <button className="p-2 hover:bg-white rounded-lg transition-colors">
-                        <Eye size={16} className="text-slate-500" />
-                      </button>
+                      <button 
+  onClick={(e) => {
+    e.stopPropagation();
+    navigate(`/cases/view/${caseItem.id}`);
+  }}
+  className="p-1.5 rounded-lg text-deep-blue-600 hover:bg-deep-blue-50 transition-colors"
+  title="View Details"
+>
+  <Eye size={16} />
+</button>
                       <button className="p-2 hover:bg-white rounded-lg transition-colors">
                         <Download size={16} className="text-slate-500" />
                       </button>
