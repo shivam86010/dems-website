@@ -14,9 +14,10 @@ import EvidenceDetails from "../pages/DigitalChainofCustody/EvidenceDetails";
 import UsersRoles from "../pages/DigitalChainofCustody/UsersRoles";
 import AuditLogs from "../pages/DigitalChainofCustody/AuditLogs"; 
 import Reports from "../pages/DigitalChainofCustody/Reports";
-
+import EvidenceIntelligenceCenter from "../pages/EvidenceIntelligence/EvidenceIntelligenceCenter";
+import PolicyChart from '../pages/EvidenceIntelligence/Index'
 const Index = () => {
-  const isAuthenticated = false; // replace with real auth logic
+  const isAuthenticated = true; // replace with real auth logic
 
   return (
     <Routes>
@@ -48,6 +49,8 @@ const Index = () => {
          <Route path="users" element={<UsersRoles />} />
          <Route path="audit-logs" element={<AuditLogs />} /> 
          <Route path="reports" element={<Reports />} />
+         <Route path="EvidenceIntelligenceCenter" element={<EvidenceIntelligenceCenter/>} />
+         <Route path="police-chart" element={<PolicyChart />} />
 
       </Route>
 
