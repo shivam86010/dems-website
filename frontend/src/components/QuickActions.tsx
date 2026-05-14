@@ -1,4 +1,3 @@
-// components/QuickActions.tsx
 import { Plus, Upload, Search, FileText, Users, MapPin, Bell, Send, Shield, AlertCircle } from 'lucide-react';
 
 const actions = [

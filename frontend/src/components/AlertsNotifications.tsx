@@ -1,6 +1,5 @@
-// components/AlertsNotifications.tsx
 import { useState } from 'react';
-import { Bell, AlertTriangle, Info, CheckCircle, X, ChevronRight, Zap, Radio } from 'lucide-react';
+import { Bell, AlertTriangle, CheckCircle, X, ChevronRight, Zap, Radio } from 'lucide-react';
 
 const alerts = [
   { id: 1, type: 'critical', title: 'High-priority suspect spotted', message: 'Arvind Mehta last seen near Rohini Metro Station', time: '2 min ago', icon: AlertTriangle, color: 'text-rose-500', bg: 'bg-rose-50' },

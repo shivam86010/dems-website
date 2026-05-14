@@ -1,32 +1,3 @@
-// import EvidenceHeader from './components/EvidenceHeader'
-// import EvidenceGrid from './components/EvidenceGrid';
-// import EvidenceAnalysisPanel from './components/EvidenceAnalysisPanel';
-// import BlockchainAuditLog from './components/BlockchainAuditLog';
-// import TimelineReconstruction from './components/TimelineReconstruction';
-
-// export default function EvidenceIntelligenceCenter() {
-//   return (
-//       <div className="space-y-6">
-//         <EvidenceHeader />
-//         <div className="grid grid-cols-1 xl:grid-cols-5 2xl:grid-cols-5 gap-5">
-//           {/* Evidence Grid — left 2 cols */}
-//           <div className="xl:col-span-2 2xl:col-span-2">
-//             <EvidenceGrid />
-//           </div>
-//           {/* Analysis Panel — right 3 cols */}
-//           <div className="xl:col-span-3 2xl:col-span-3 space-y-5">
-//             <EvidenceAnalysisPanel />
-//             <TimelineReconstruction />
-//           </div>
-//         </div>
-//         {/* Blockchain Audit Log — full width */}
-//         <BlockchainAuditLog />
-//       </div>
-//   );
-// }
-
-
-// EvidenceIntelligenceCenter.tsx
 import EvidenceHeader from './components/EvidenceHeader';
 import EvidenceGrid from './components/EvidenceGrid';
 import EvidenceAnalysisPanel from './components/EvidenceAnalysisPanel';
@@ -40,12 +11,10 @@ export default function EvidenceIntelligenceCenter() {
         <EvidenceHeader />
         
         <div className="grid grid-cols-1 xl:grid-cols-5 gap-6">
-          {/* Evidence Grid — left */}
           <div className="xl:col-span-2">
             <EvidenceGrid />
           </div>
           
-          {/* Right column */}
           <div className="xl:col-span-3 space-y-6">
             <EvidenceAnalysisPanel />
             <TimelineReconstruction />

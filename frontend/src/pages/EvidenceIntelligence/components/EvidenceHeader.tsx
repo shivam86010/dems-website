@@ -1,5 +1,3 @@
-// components/EvidenceHeader.tsx
-import React from 'react';
 import { Upload, PackageCheck, Filter, Shield } from 'lucide-react';
 
 export default function EvidenceHeader() {
@@ -11,7 +9,7 @@ export default function EvidenceHeader() {
             <Shield size={16} className="text-white" />
           </div>
           <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Evidence Intelligence</h1>
-          <span className="text-2xs font-semibold px-2 py-0.5 rounded-full bg-deep-blue-500/15 text-deep-blue-400 border border-deep-blue-500/30 uppercase tracking-wider">
+          <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-deep-blue-500/15 text-deep-blue-400 border border-deep-blue-500/30 uppercase tracking-wider">
             AI Active
           </span>
         </div>

@@ -1,4 +1,3 @@
-// components/RecentFIRTable.tsx
 import { useState } from 'react';
 import { FileText, Eye, AlertTriangle, CheckCircle, Clock, MoreVertical, User, MapPin, Calendar, Shield, ChevronDown } from 'lucide-react';
 

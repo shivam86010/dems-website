@@ -1,5 +1,4 @@
-// components/PoliceDashboardStats.tsx
-import { Users, FileText, CheckCircle, AlertTriangle, Shield, Clock, TrendingUp, Building } from 'lucide-react';
+import { Users, FileText, CheckCircle, AlertTriangle, Shield, Clock, TrendingUp } from 'lucide-react';
 
 const stats = [
   { label: 'Active Cases', value: '247', change: '+12%', icon: FileText, color: 'from-deep-blue-500 to-deep-blue-600', bg: 'bg-deep-blue-50', text: 'text-deep-blue-600' },

@@ -1,4 +1,3 @@
-// components/CaseTrendsChartInner.tsx
 import {
   AreaChart,
   Area,
@@ -8,6 +7,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { TrendingUp } from 'lucide-react';
 
 const data = [
   { week: '25 Mar', firs: 31, resolved: 18, critical: 7 },
@@ -45,7 +45,7 @@ export default function CaseTrendsChartInner() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <div className="p-1.5 rounded-lg bg-cyan-100">
-                {/* <TrendingUp size={14} className="text-cyan-600" /> */}
+                <TrendingUp size={14} className="text-cyan-600" />
               </div>
               <h3 className="text-sm font-semibold text-slate-800">Case Trends</h3>
             </div>
