@@ -16,22 +16,23 @@ import AuditLogs from "../pages/DigitalChainofCustody/AuditLogs";
 import Reports from "../pages/DigitalChainofCustody/Reports";
 import EvidenceIntelligenceCenter from "../pages/EvidenceIntelligence/EvidenceIntelligenceCenter";
 import PolicyChart from '../pages/EvidenceIntelligence/Index'
+import JudgeDashboard from '../pages/Judge'
 const Index = () => {
   const isAuthenticated = true; // replace with real auth logic
 
   return (
     <Routes>
       {/* Root Route */}
-      <Route 
-        path="/" 
+      <Route
+        path="/"
         element={
           isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />
-        } 
+        }
       />
 
       {/* Dashboard Routes */}
-      <Route 
-        path="/dashboard" 
+      <Route
+        path="/dashboard"
         element={
           isAuthenticated ? <DashboardLayout /> : <Navigate to="/" replace />
         }
@@ -39,19 +40,22 @@ const Index = () => {
         {/* Use relative paths (no leading slash) */}
         <Route path="case" element={<Case />} />
         <Route path="cases/view/:id" element={<CaseDetailView />} />
-        <Route index element={<CaseDashboard />} /> 
-        <Route path="cos" element={<Dashboard/>}/>
-        <Route path="cos-case" element={<CosCase/>}/>
-        <Route path="cos-create-case" element={<CosCreateCase/>} />
-        <Route  path="cos-case-details/:id" element={<CosCaseDetails/>} /> 
-        <Route  path="evidence-vault" element={<EvidenceVault/>} />
-        <Route  path="evidence-details/:id" element={<EvidenceDetails/>} /> 
-         <Route path="users" element={<UsersRoles />} />
-         <Route path="audit-logs" element={<AuditLogs />} /> 
-         <Route path="reports" element={<Reports />} />
-         <Route path="EvidenceIntelligenceCenter" element={<EvidenceIntelligenceCenter/>} />
-         <Route path="police-chart" element={<PolicyChart />} />
-
+        <Route index element={<CaseDashboard />} />
+        <Route path="cos" element={<Dashboard />} />
+        <Route path="cos-case" element={<CosCase />} />
+        <Route path="cos-create-case" element={<CosCreateCase />} />
+        <Route path="cos-case-details/:id" element={<CosCaseDetails />} />
+        <Route path="evidence-vault" element={<EvidenceVault />} />
+        <Route path="evidence-details/:id" element={<EvidenceDetails />} />
+        <Route path="users" element={<UsersRoles />} />
+        <Route path="audit-logs" element={<AuditLogs />} />
+        <Route path="reports" element={<Reports />} />
+        <Route
+          path="EvidenceIntelligenceCenter"
+          element={<EvidenceIntelligenceCenter />}
+        />
+        <Route path="police-chart" element={<PolicyChart />} />
+        <Route path="judgedashboard" element={<JudgeDashboard />} />
       </Route>
 
       {/* 404 */}
