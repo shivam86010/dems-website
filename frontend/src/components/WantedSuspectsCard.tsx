@@ -1,4 +1,3 @@
-// components/WantedSuspectsCard.tsx
 import { UserX, MapPin, Target, Award, Calendar } from 'lucide-react';
 
 const wantedSuspects = [

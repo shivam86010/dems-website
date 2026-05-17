@@ -1,46 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Scale,
   Clock,
-  FileText,
-  Video,
   Brain,
   AlertTriangle,
   CheckCircle,
   TrendingUp,
-  Users,
-  Calendar,
   Shield,
-  Zap,
   ArrowUpRight,
-  Activity,
-  HardDrive,
   BarChart3,
   LineChart,
   PieChart,
   TrendingDown,
-  Gauge,
-  Target,
-  Radar,
-  Hash,
-  ChartNoAxesColumn,
   ChartLine,
-  ChartPie,
   X,
-  Download,
-  Share2,
-  Printer,
-  Mail,
-  Phone,
-  MessageCircle,
-  Eye,
-  User,
-  MapPin,
-  Calendar as CalendarIcon,
-  Fingerprint,
-  Camera,
-  Mic,
-  FileCheck,
   Send,
   Bell,
 } from "lucide-react";
@@ -58,19 +31,35 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  AreaChart,
-  Area,
   ComposedChart,
 } from "recharts";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../hooks/useToast";
+import type {
+  Stats,
+  MonthlyData,
+  PriorityData,
+  JudgeLoadData,
+  PendingAgeData,
+  HearingData,
+  EvidenceAdmissibilityData,
+  DisposalRateData,
+  DisposalVsFilingData,
+  BacklogProjection,
+  RecentCase,
+  PendingAlert,
+  CustomTooltipProps,
+} from "../type/dashboard.types";
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
+  const toast = useToast();
   const navigate = useNavigate();
 
-  const handleReviewCase = (caseItem) => {
+  const handleReviewCase = (caseItem: RecentCase): void => {
     navigate(`/case/${caseItem.id}`);
   };
-  const [stats, setStats] = useState({
+
+  const [stats] = useState<Stats>({
     totalCases: 2847,
     pendingCases: 1243,
     aiSummarized: 892,
@@ -79,27 +68,18 @@ const Dashboard = () => {
     backlogReduction: 28,
   });
 
-  // Modal States
-  const [selectedCase, setSelectedCase] = useState(null);
   const [showEvidenceRequestModal, setShowEvidenceRequestModal] =
-    useState(false);
-  const [showWitnessSummonModal, setShowWitnessSummonModal] = useState(false);
-  const [showVerifyModal, setShowVerifyModal] = useState(false);
-  const [selectedAlert, setSelectedAlert] = useState(null);
-  const [requestMessage, setRequestMessage] = useState("");
-  const [witnessDate, setWitnessDate] = useState("");
-  const [verificationNotes, setVerificationNotes] = useState("");
-
-  // Toast notification
-  const [toast, setToast] = useState({ show: false, message: "", type: "" });
-
-  const showToast = (message, type = "success") => {
-    setToast({ show: true, message, type });
-    setTimeout(() => setToast({ show: false, message: "", type: "" }), 3000);
-  };
+    useState<boolean>(false);
+  const [showWitnessSummonModal, setShowWitnessSummonModal] =
+    useState<boolean>(false);
+  const [showVerifyModal, setShowVerifyModal] = useState<boolean>(false);
+  const [selectedAlert, setSelectedAlert] = useState<PendingAlert | null>(null);
+  const [requestMessage, setRequestMessage] = useState<string>("");
+  const [witnessDate, setWitnessDate] = useState<string>("");
+  const [verificationNotes, setVerificationNotes] = useState<string>("");
 
   // Monthly Case Data for Line Chart
-  const monthlyData = [
+  const monthlyData: MonthlyData[] = [
     {
       month: "Jan",
       newCases: 245,
@@ -187,35 +167,15 @@ const Dashboard = () => {
   ];
 
   // Priority Distribution for Pie Chart
-  const priorityData = [
+  const priorityData: PriorityData[] = [
     { name: "Critical", value: 43, color: "#DC2626" },
     { name: "High", value: 127, color: "#F59E0B" },
     { name: "Medium", value: 456, color: "#3B82F6" },
     { name: "Low", value: 617, color: "#10B981" },
   ];
 
-  // Case Type Distribution for Bar Chart
-  const caseTypeData = [
-    { type: "Criminal", count: 1243, percentage: 43.7, trend: "+5.2%" },
-    { type: "Civil", count: 892, percentage: 31.3, trend: "+2.1%" },
-    { type: "Family", count: 412, percentage: 14.5, trend: "+8.3%" },
-    { type: "Corporate", count: 189, percentage: 6.6, trend: "+12.4%" },
-    { type: "Cyber", count: 111, percentage: 3.9, trend: "+23.7%" },
-  ];
-
-  // Weekly Resolution Rate for Area Chart
-  const weeklyData = [
-    { day: "Mon", filed: 28, resolved: 24, aiAssisted: 22 },
-    { day: "Tue", filed: 32, resolved: 29, aiAssisted: 27 },
-    { day: "Wed", filed: 35, resolved: 31, aiAssisted: 30 },
-    { day: "Thu", filed: 30, resolved: 33, aiAssisted: 31 },
-    { day: "Fri", filed: 38, resolved: 35, aiAssisted: 34 },
-    { day: "Sat", filed: 15, resolved: 18, aiAssisted: 17 },
-    { day: "Sun", filed: 8, resolved: 12, aiAssisted: 11 },
-  ];
-
   // Backlog Reduction Projection
-  const backlogProjection = [
+  const backlogProjection: BacklogProjection[] = [
     { month: "Jan", actual: 1243, projected: 1243, target: 1200 },
     { month: "Feb", actual: 1208, projected: 1190, target: 1150 },
     { month: "Mar", actual: 1182, projected: 1140, target: 1100 },
@@ -225,7 +185,7 @@ const Dashboard = () => {
   ];
 
   // Judge Wise Case Load Distribution
-  const judgeLoadData = [
+  const judgeLoadData: JudgeLoadData[] = [
     {
       judge: "Justice Sharma",
       activeCases: 156,
@@ -259,7 +219,7 @@ const Dashboard = () => {
   ];
 
   // Pending Cases by Age
-  const pendingAgeData = [
+  const pendingAgeData: PendingAgeData[] = [
     { name: "< 30 days", value: 234, color: "#10B981" },
     { name: "30-90 days", value: 456, color: "#3B82F6" },
     { name: "90-180 days", value: 312, color: "#F59E0B" },
@@ -268,7 +228,7 @@ const Dashboard = () => {
   ];
 
   // Hearing vs Adjournment Ratio
-  const hearingData = [
+  const hearingData: HearingData[] = [
     {
       month: "Jan",
       scheduled: 245,
@@ -314,7 +274,7 @@ const Dashboard = () => {
   ];
 
   // Evidence Admissibility Rate
-  const evidenceAdmissibilityData = [
+  const evidenceAdmissibilityData: EvidenceAdmissibilityData[] = [
     { type: "CCTV Footage", submitted: 245, admitted: 238, rate: 97.1 },
     { type: "Documents", submitted: 567, admitted: 534, rate: 94.2 },
     { type: "Witness Statements", submitted: 345, admitted: 312, rate: 90.4 },
@@ -323,7 +283,7 @@ const Dashboard = () => {
   ];
 
   // Disposal Rate by Case Type
-  const disposalRateData = [
+  const disposalRateData: DisposalRateData[] = [
     { type: "Criminal", filed: 1243, disposed: 534, rate: 43.0 },
     { type: "Civil", filed: 892, disposed: 412, rate: 46.2 },
     { type: "Family", filed: 412, disposed: 189, rate: 45.9 },
@@ -332,7 +292,7 @@ const Dashboard = () => {
   ];
 
   // Monthly Disposal vs Filing Gap
-  const disposalVsFilingData = [
+  const disposalVsFilingData: DisposalVsFilingData[] = [
     { month: "Jan", filed: 245, disposed: 210, gap: 35 },
     { month: "Feb", filed: 267, disposed: 235, gap: 32 },
     { month: "Mar", filed: 289, disposed: 258, gap: 31 },
@@ -341,7 +301,7 @@ const Dashboard = () => {
     { month: "Jun", filed: 324, disposed: 290, gap: 34 },
   ];
 
-  const recentCases = [
+  const recentCases: RecentCase[] = [
     {
       id: "2024-001",
       title: "State vs. Rajesh Kumar",
@@ -384,7 +344,7 @@ const Dashboard = () => {
     },
   ];
 
-  const pendingAlerts = [
+  const pendingAlerts: PendingAlert[] = [
     {
       id: 1,
       case: "State vs. Ramesh Gupta",
@@ -411,46 +371,46 @@ const Dashboard = () => {
     },
   ];
 
-  const handleRequestEvidence = (alert) => {
+  const handleRequestEvidence = (alert: PendingAlert): void => {
     setSelectedAlert(alert);
     setShowEvidenceRequestModal(true);
   };
 
-  const handleSummonWitness = (alert) => {
+  const handleSummonWitness = (alert: PendingAlert): void => {
     setSelectedAlert(alert);
     setShowWitnessSummonModal(true);
   };
 
-  const handleVerifyNow = (alert) => {
+  const handleVerifyNow = (alert: PendingAlert): void => {
     setSelectedAlert(alert);
     setShowVerifyModal(true);
   };
 
-  const submitEvidenceRequest = () => {
-    showToast(`Evidence request sent for ${selectedAlert?.case}`, "success");
+  const submitEvidenceRequest = (): void => {
+    toast.success(`Evidence request sent for ${selectedAlert?.case}`);
     setShowEvidenceRequestModal(false);
     setRequestMessage("");
   };
 
-  const submitWitnessSummon = () => {
-    showToast(
+  const submitWitnessSummon = (): void => {
+    toast.success(
       `Witness summons sent for ${selectedAlert?.case} on ${witnessDate}`,
-      "success",
     );
     setShowWitnessSummonModal(false);
     setWitnessDate("");
   };
 
-  const submitVerification = () => {
-    showToast(
-      `Document verification initiated for ${selectedAlert?.case}`,
-      "success",
-    );
+  const submitVerification = (): void => {
+    toast.success(`Document verification initiated for ${selectedAlert?.case}`);
     setShowVerifyModal(false);
     setVerificationNotes("");
   };
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip: React.FC<CustomTooltipProps> = ({
+    active,
+    payload,
+    label,
+  }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-3 rounded-lg shadow-lg border border-slate-200">
@@ -472,22 +432,6 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Toast Notification */}
-      {toast.show && (
-        <div className="fixed top-20 right-6 z-50 animate-slide-in-right">
-          <div
-            className={`px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 ${
-              toast.type === "success"
-                ? "bg-success text-white"
-                : "bg-error text-white"
-            }`}
-          >
-            <CheckCircle className="w-4 h-4" />
-            <span className="text-sm">{toast.message}</span>
-          </div>
-        </div>
-      )}
-
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="bg-white rounded-xl p-5 shadow-premium border border-slate-100 hover:shadow-premium-lg transition-all group">

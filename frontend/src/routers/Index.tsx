@@ -18,7 +18,7 @@ import EvidenceIntelligenceCenter from "../pages/EvidenceIntelligence/EvidenceIn
 import PolicyChart from '../pages/EvidenceIntelligence/Index'
 import JudgeDashboard from '../pages/Judge'
 const Index = () => {
-  const isAuthenticated = true; // replace with real auth logic
+  const isAuthenticated = true;
 
   return (
     <Routes>

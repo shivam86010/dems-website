@@ -1,6 +1,5 @@
-// pages/Cases.tsx
 import React, { useState } from 'react';
-import { Plus, Search, Filter, MoreVertical, Eye, Edit, Trash2, FileText, Shield, Clock, User, Tag, ChevronRight, ChevronLeft, Download, Printer } from 'lucide-react';
+import { Plus, Search, Filter, Eye, Edit, Trash2, FileText, Shield, ChevronRight, ChevronLeft, Download, Printer } from 'lucide-react';
 import CreateCaseModal from '../components/caseEvidence/CreateCaseModal';
 import CaseDetails from '../components/caseEvidence/CaseDetails';
 

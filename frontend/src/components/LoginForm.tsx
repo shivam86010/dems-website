@@ -1,79 +1,102 @@
-// components/LoginForm.tsx
-import React, { useState, useCallback } from 'react';
-import { Eye, EyeOff, Mail, Lock, LogIn, Fingerprint, Shield, ArrowRight } from 'lucide-react';
-import { GoogleIcon, FacebookIcon, TwitterIcon } from './SocialIcons';
-
+import React, { useState, useCallback } from "react";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  LogIn,
+  Fingerprint,
+  ArrowRight,
+} from "lucide-react";
+import { GoogleIcon, FacebookIcon, TwitterIcon } from "./SocialIcons";
+import { useToast } from "../hooks/useToast";
 export const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const toast = useToast();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSocialLoading, setIsSocialLoading] = useState<string | null>(null);
   const [rememberMe, setRememberMe] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const validateEmail = useCallback((emailValue: string): boolean => {
     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
-    setEmailError(isValid ? '' : 'Please enter a valid email address');
+    setEmailError(isValid ? "" : "Please enter a valid email address");
     return isValid;
   }, []);
 
   const validatePassword = useCallback((passwordValue: string): boolean => {
     const isValid = passwordValue.length >= 6;
-    setPasswordError(isValid ? '' : 'Password must be at least 6 characters');
+    setPasswordError(isValid ? "" : "Password must be at least 6 characters");
     return isValid;
   }, []);
 
-  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newEmail = e.target.value;
-    setEmail(newEmail);
-    if (newEmail) validateEmail(newEmail);
-    else setEmailError('');
-  }, [validateEmail]);
+  const handleEmailChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newEmail = e.target.value;
+      setEmail(newEmail);
+      if (newEmail) validateEmail(newEmail);
+      else setEmailError("");
+    },
+    [validateEmail],
+  );
 
-  const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    if (newPassword) validatePassword(newPassword);
-    else setPasswordError('');
-  }, [validatePassword]);
+  const handlePasswordChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newPassword = e.target.value;
+      setPassword(newPassword);
+      if (newPassword) validatePassword(newPassword);
+      else setPasswordError("");
+    },
+    [validatePassword],
+  );
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const isEmailValid = validateEmail(email);
-    const isPasswordValid = validatePassword(password);
-    
-    if (!isEmailValid || !isPasswordValid) return;
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
 
-    setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    console.log('Login attempt:', { email, password, rememberMe });
-    alert('Login successful! (Demo)');
-    setIsLoading(false);
-  }, [email, password, rememberMe, validateEmail, validatePassword]);
+      const isEmailValid = validateEmail(email);
+      const isPasswordValid = validatePassword(password);
 
-  const handleSocialLogin = useCallback(async (provider: 'google' | 'facebook' | 'twitter') => {
-    setIsSocialLoading(provider);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    console.log(`${provider} login attempted`);
-    alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} authentication would be integrated with OAuth 2.0`);
-    setIsSocialLoading(null);
-  }, []);
+      if (!isEmailValid || !isPasswordValid) return;
+
+      setIsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      console.log("Login attempt:", { email, password, rememberMe });
+      toast.success("Login successful! (Demo)");
+      setIsLoading(false);
+    },
+    [email, password, rememberMe, validateEmail, validatePassword],
+  );
+
+  const handleSocialLogin = useCallback(
+    async (provider: "google" | "facebook" | "twitter") => {
+      setIsSocialLoading(provider);
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      console.log(`${provider} login attempted`);
+      alert(
+        `${provider.charAt(0).toUpperCase() + provider.slice(1)} authentication would be integrated with OAuth 2.0`,
+      );
+      setIsSocialLoading(null);
+    },
+    [],
+  );
 
   const handleBiometricAuth = useCallback(() => {
-    alert('Biometric authentication would be triggered using WebAuthn API');
+    toast.error(
+      "Biometric authentication would be triggered using WebAuthn API",
+    );
   }, []);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-    
-      
-
       {/* Email Field */}
       <div className="space-y-2">
-        <label className="text-sm font-medium text-bg-card/80 block">Email Address</label>
+        <label className="text-sm font-medium text-bg-card/80 block">
+          Email Address
+        </label>
         <div className="relative group">
           <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-bg-card/40 group-focus-within:text-deep-blue-light transition-colors" />
           <input
@@ -82,8 +105,8 @@ export const LoginForm: React.FC = () => {
             onChange={handleEmailChange}
             className={`w-full bg-bg-card/5 border rounded-xl py-3 pl-10 pr-4 text-bg-card placeholder:text-bg-card/30 focus:outline-none focus:ring-2 transition-all duration-200 ${
               emailError && email
-                ? 'border-error/50 focus:border-error focus:ring-error/20'
-                : 'border-bg-card/10 focus:border-deep-blue-light focus:ring-deep-blue-light/20 hover:border-bg-card/20'
+                ? "border-error/50 focus:border-error focus:ring-error/20"
+                : "border-bg-card/10 focus:border-deep-blue-light focus:ring-deep-blue-light/20 hover:border-bg-card/20"
             }`}
             placeholder="Enter your email"
             required
@@ -100,21 +123,26 @@ export const LoginForm: React.FC = () => {
       {/* Password Field */}
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <label className="text-sm font-medium text-bg-card/80 block">Password</label>
-          <button type="button" className="text-xs text-deep-blue-light hover:text-deep-blue transition-colors font-medium">
+          <label className="text-sm font-medium text-bg-card/80 block">
+            Password
+          </label>
+          <button
+            type="button"
+            className="text-xs text-deep-blue-light hover:text-deep-blue transition-colors font-medium"
+          >
             Forgot password?
           </button>
         </div>
         <div className="relative group">
           <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-bg-card/40 group-focus-within:text-deep-blue-light transition-colors" />
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={handlePasswordChange}
             className={`w-full bg-bg-card/5 border rounded-xl py-3 pl-10 pr-12 text-bg-card placeholder:text-bg-card/30 focus:outline-none focus:ring-2 transition-all duration-200 ${
               passwordError && password
-                ? 'border-error/50 focus:border-error focus:ring-error/20'
-                : 'border-bg-card/10 focus:border-deep-blue-light focus:ring-deep-blue-light/20 hover:border-bg-card/20'
+                ? "border-error/50 focus:border-error focus:ring-error/20"
+                : "border-bg-card/10 focus:border-deep-blue-light focus:ring-deep-blue-light/20 hover:border-bg-card/20"
             }`}
             placeholder="Enter your password"
             required
@@ -124,7 +152,11 @@ export const LoginForm: React.FC = () => {
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-bg-card/40 hover:text-bg-card/60 transition-colors"
           >
-            {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            {showPassword ? (
+              <EyeOff className="w-4 h-4" />
+            ) : (
+              <Eye className="w-4 h-4" />
+            )}
           </button>
         </div>
         {passwordError && password && (
@@ -144,7 +176,9 @@ export const LoginForm: React.FC = () => {
             onChange={(e) => setRememberMe(e.target.checked)}
             className="w-4 h-4 rounded border-bg-card/20 bg-bg-card/5 checked:bg-deep-blue checked:border-deep-blue focus:ring-deep-blue focus:ring-offset-0 transition-colors cursor-pointer"
           />
-          <span className="text-sm text-bg-card/60 group-hover:text-bg-card/80 transition-colors">Remember me</span>
+          <span className="text-sm text-bg-card/60 group-hover:text-bg-card/80 transition-colors">
+            Remember me
+          </span>
         </label>
         <button
           type="button"
@@ -177,7 +211,6 @@ export const LoginForm: React.FC = () => {
         )}
       </button>
 
-
       {/* Social Media Login Options */}
       <div className="space-y-4">
         <div className="relative">
@@ -185,14 +218,16 @@ export const LoginForm: React.FC = () => {
             <div className="w-full border-t border-bg-card/10"></div>
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="px-3 bg-transparent text-bg-card/40 font-medium">Or continue with email</span>
+            <span className="px-3 bg-transparent text-bg-card/40 font-medium">
+              Or continue with email
+            </span>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3">
           {[
-            { provider: 'google', Icon: GoogleIcon, label: 'Google' },
-            { provider: 'facebook', Icon: FacebookIcon, label: 'Facebook' },
-            { provider: 'twitter', Icon: TwitterIcon, label: 'X' },
+            { provider: "google", Icon: GoogleIcon, label: "Google" },
+            { provider: "facebook", Icon: FacebookIcon, label: "Facebook" },
+            { provider: "twitter", Icon: TwitterIcon, label: "X" },
           ].map(({ provider, Icon, label }) => (
             <button
               key={provider}
@@ -207,19 +242,15 @@ export const LoginForm: React.FC = () => {
               ) : (
                 <>
                   <Icon className="w-4 h-4" />
-                  <span className="text-xs font-medium text-bg-card/70 group-hover:text-bg-card">{label}</span>
+                  <span className="text-xs font-medium text-bg-card/70 group-hover:text-bg-card">
+                    {label}
+                  </span>
                 </>
               )}
             </button>
           ))}
         </div>
       </div>
-
-      
-      
-
-     
-     
     </form>
   );
 };
