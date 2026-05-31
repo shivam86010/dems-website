@@ -8,9 +8,9 @@ import { ToastProvider } from "./hooks/useToast.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ToastProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      {/* <BrowserRouter> */}
+      <App />
+      {/* </BrowserRouter> */}
     </ToastProvider>
   </StrictMode>,
 );
