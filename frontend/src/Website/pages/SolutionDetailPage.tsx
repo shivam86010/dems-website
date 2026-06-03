@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// Website/pages/SolutionDetailPage.tsx
+import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   Shield,
@@ -41,14 +42,18 @@ import {
   Phone,
   Mail,
   MessageSquare,
+  Send,
+  User,
+  Building,
 } from "lucide-react";
 
-// Detailed solution data with slate/dark theme colors
+// Detailed solution data with slate/dark theme colors and categories
 const solutionDetails = {
   "e-discovery": {
     id: "e-discovery",
     title: "E-Discovery",
     icon: Shield,
+    category: "discovery",
     shortDescription:
       "Streamline discovery with automated tagging, search, and production-ready exports.",
     longDescription:
@@ -117,6 +122,7 @@ const solutionDetails = {
     id: "evidence-management",
     title: "Evidence Management",
     icon: Database,
+    category: "storage",
     shortDescription:
       "Centralized repository with SHA-256 integrity verification for all evidence types.",
     longDescription:
@@ -184,6 +190,7 @@ const solutionDetails = {
     id: "internal-investigations",
     title: "Internal Investigations",
     icon: Users,
+    category: "investigations",
     shortDescription:
       "Secure workspace for HR and legal teams to conduct confidential investigations.",
     longDescription:
@@ -241,6 +248,7 @@ const solutionDetails = {
     id: "contract-review",
     title: "Contract Review",
     icon: FileCheck,
+    category: "document",
     shortDescription:
       "AI-assisted contract analysis with complete audit trail of all reviews and changes.",
     longDescription:
@@ -293,6 +301,7 @@ const solutionDetails = {
     id: "regulatory-compliance",
     title: "Regulatory Compliance",
     icon: Lock,
+    category: "compliance",
     shortDescription:
       "Meet GDPR, HIPAA, FedRAMP, and SOC2 requirements with pre-built compliance packs.",
     longDescription:
@@ -357,6 +366,7 @@ const solutionDetails = {
     id: "cloud-forensics",
     title: "Cloud Forensics",
     icon: Cloud,
+    category: "forensics",
     shortDescription:
       "Collect and preserve cloud-based evidence from major providers.",
     longDescription:
@@ -409,6 +419,7 @@ const solutionDetails = {
     id: "legal-analytics",
     title: "Legal Analytics",
     icon: BarChart3,
+    category: "analytics",
     shortDescription:
       "Data-driven insights to optimize case strategies and reduce litigation costs.",
     longDescription:
@@ -461,6 +472,7 @@ const solutionDetails = {
     id: "api-integration",
     title: "API Integration",
     icon: Settings,
+    category: "integration",
     shortDescription:
       "Seamless integration with existing case management and document systems.",
     longDescription:
@@ -524,6 +536,41 @@ const SolutionDetailPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
     "overview" | "technical" | "security"
   >("overview");
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isSidebarSticky, setIsSidebarSticky] = useState(false);
+
+  // Handle scroll for sticky sidebar
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const heroHeight = 500; // Approximate hero section height
+      setIsSidebarSticky(scrollPosition > heroHeight);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleContactChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setContactForm({
+      ...contactForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setTimeout(() => setFormSubmitted(false), 3000);
+    setContactForm({ name: "", email: "", phone: "", message: "" });
+  };
 
   if (!solution) {
     return (
@@ -549,6 +596,19 @@ const SolutionDetailPage: React.FC = () => {
 
   const IconComponent = solution.icon;
   const themeColor = solution.themeColor;
+
+  // Get similar solutions based on category
+  const similarSolutions = Object.entries(solutionDetails)
+    .filter(([key, sol]) => key !== id && sol.category === solution.category)
+    .slice(0, 3);
+
+  // If no exact category matches, get other popular solutions
+  const relatedSolutions =
+    similarSolutions.length > 0
+      ? similarSolutions
+      : Object.entries(solutionDetails)
+          .filter(([key]) => key !== id)
+          .slice(0, 3);
 
   const getColorClasses = (color: string) => {
     const classes: Record<
@@ -655,9 +715,7 @@ const SolutionDetailPage: React.FC = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
                 {solution.title}
               </h1>
-              <div
-                className={`h-1 w-20 bg-${themeColor}-500 rounded-full mt-6 mb-6`}
-              />
+              <div className="h-1 w-20 bg-indigo-500 rounded-full mt-6 mb-6" />
               <p className="text-lg text-slate-300 leading-relaxed">
                 {solution.longDescription}
               </p>
@@ -732,14 +790,14 @@ const SolutionDetailPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Tab Navigation */}
+      {/* Tab Navigation and Content */}
       <section className="py-16 max-w-7xl mx-auto px-6">
         <div className="flex flex-wrap gap-2 border-b border-slate-200 mb-10">
           <button
             onClick={() => setActiveTab("overview")}
             className={`px-6 py-3 font-semibold text-sm rounded-t-lg transition-all ${
               activeTab === "overview"
-                ? `${colors.text} border-b-2 border-${themeColor}-500 ${colors.bg}`
+                ? `${colors.text} border-b-2 border-indigo-500 ${colors.bg}`
                 : "text-slate-500 hover:text-slate-700 hover:bg-slate-100"
             }`}
           >
@@ -749,7 +807,7 @@ const SolutionDetailPage: React.FC = () => {
             onClick={() => setActiveTab("technical")}
             className={`px-6 py-3 font-semibold text-sm rounded-t-lg transition-all ${
               activeTab === "technical"
-                ? `${colors.text} border-b-2 border-${themeColor}-500 ${colors.bg}`
+                ? `${colors.text} border-b-2 border-indigo-500 ${colors.bg}`
                 : "text-slate-500 hover:text-slate-700 hover:bg-slate-100"
             }`}
           >
@@ -759,7 +817,7 @@ const SolutionDetailPage: React.FC = () => {
             onClick={() => setActiveTab("security")}
             className={`px-6 py-3 font-semibold text-sm rounded-t-lg transition-all ${
               activeTab === "security"
-                ? `${colors.text} border-b-2 border-${themeColor}-500 ${colors.bg}`
+                ? `${colors.text} border-b-2 border-indigo-500 ${colors.bg}`
                 : "text-slate-500 hover:text-slate-700 hover:bg-slate-100"
             }`}
           >
@@ -767,9 +825,10 @@ const SolutionDetailPage: React.FC = () => {
           </button>
         </div>
 
-        {/* Tab Content */}
-        <div className="grid lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2">
+        {/* Tab Content with Sticky Sidebar */}
+        <div className="flex flex-col lg:flex-row gap-10">
+          {/* Left Column - Scrollable Content */}
+          <div className="lg:w-2/3 space-y-8">
             {/* Overview Tab */}
             {activeTab === "overview" && (
               <div className="space-y-8 animate-in fade-in slide-in-from-left-5 duration-500">
@@ -940,82 +999,181 @@ const SolutionDetailPage: React.FC = () => {
             )}
           </div>
 
-          {/* Right Sidebar */}
-          <div className="space-y-6">
-            {/* Quick Actions */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-              <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                <Zap size={18} className="text-amber-500" /> Quick Actions
-              </h3>
-              <div className="space-y-3">
-                <button className="w-full flex items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-2.5 rounded-xl hover:border-slate-300 hover:shadow-md transition-all">
-                  <Download size={16} className="text-indigo-500" /> Download
-                  Datasheet
-                </button>
-                <button className="w-full flex items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-2.5 rounded-xl hover:border-slate-300 hover:shadow-md transition-all">
-                  <Share2 size={16} className="text-emerald-500" /> Share
-                  Solution
-                </button>
-                <button className="w-full flex items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-2.5 rounded-xl hover:border-slate-300 hover:shadow-md transition-all">
-                  <Printer size={16} className="text-purple-500" /> Print
-                  Details
-                </button>
-              </div>
-            </div>
-
-            {/* Contact Card */}
-            <div className="bg-slate-800 rounded-2xl p-6 text-white">
-              <div className="flex items-center gap-2 mb-3">
-                <MessageSquare size={20} className="text-slate-400" />
-                <h3 className="font-bold text-lg">Need Help?</h3>
-              </div>
-              <p className="text-slate-300 text-sm mb-4">
-                Our solution experts are ready to answer your questions about{" "}
-                {solution.title}.
-              </p>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm text-slate-300">
-                  <Phone size={14} /> +1 (888) 421-DEMS
+          {/* Right Sidebar - Sticky Contact Form */}
+          <div className="lg:w-1/3">
+            <div
+              className={`space-y-6 ${isSidebarSticky ? "sticky top-24" : ""}`}
+            >
+              {/* Contact Form Card */}
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <MessageSquare size={18} className="text-indigo-500" />
+                  <h3 className="font-bold text-lg text-slate-800">
+                    Request Information
+                  </h3>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-slate-300">
-                  <Mail size={14} /> sales@demsplus.com
+                <form onSubmit={handleContactSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={contactForm.name}
+                      onChange={handleContactChange}
+                      placeholder="John Doe"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={contactForm.email}
+                      onChange={handleContactChange}
+                      placeholder="john@company.com"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={contactForm.phone}
+                      onChange={handleContactChange}
+                      placeholder="+1 (555) 000-0000"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">
+                      How can we help you?
+                    </label>
+                    <textarea
+                      name="message"
+                      value={contactForm.message}
+                      onChange={handleContactChange}
+                      placeholder="Tell us about your requirements..."
+                      rows={3}
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className={`w-full bg-gradient-to-r ${colors.gradient} text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2`}
+                  >
+                    {formSubmitted ? (
+                      <>
+                        <CheckCircle2 size={18} /> Request Sent!
+                      </>
+                    ) : (
+                      <>
+                        <Send size={18} /> Submit Request
+                      </>
+                    )}
+                  </button>
+                </form>
+                {formSubmitted && (
+                  <div className="mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-center">
+                    <p className="text-emerald-700 text-sm font-medium">
+                      ✓ Thank you! A specialist will contact you shortly.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Quick Actions */}
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                  <Zap size={18} className="text-amber-500" /> Quick Actions
+                </h3>
+                <div className="space-y-3">
+                  <button className="w-full flex items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-3 rounded-xl hover:border-slate-300 hover:shadow-md transition-all text-sm font-medium text-slate-700">
+                    <Download size={16} className="text-indigo-500" /> Download
+                    Datasheet
+                  </button>
+                  <button className="w-full flex items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-3 rounded-xl hover:border-slate-300 hover:shadow-md transition-all text-sm font-medium text-slate-700">
+                    <Share2 size={16} className="text-emerald-500" /> Share
+                    Solution
+                  </button>
+                  <button className="w-full flex items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-3 rounded-xl hover:border-slate-300 hover:shadow-md transition-all text-sm font-medium text-slate-700">
+                    <Printer size={16} className="text-purple-500" /> Print
+                    Details
+                  </button>
+                </div>
+              </div>
+
+              {/* Contact Card */}
+              <div className="bg-slate-800 rounded-2xl p-6 text-white">
+                <div className="flex items-center gap-2 mb-3">
+                  <MessageSquare size={20} className="text-slate-400" />
+                  <h3 className="font-bold text-lg">Need Help?</h3>
+                </div>
+                <p className="text-slate-300 text-sm mb-4">
+                  Our solution experts are ready to answer your questions about{" "}
+                  {solution.title}.
+                </p>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-sm text-slate-300">
+                    <Phone size={14} /> +1 (888) 421-DEMS
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-slate-300">
+                    <Mail size={14} /> sales@demsplus.com
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Resource Card */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-3">
-                <BookOpen size={18} className="text-indigo-500" />
-                <h3 className="font-bold text-slate-800">Resources</h3>
-              </div>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    to="/resources"
-                    className="text-slate-600 text-sm hover:text-indigo-600 transition-colors flex items-center gap-1"
+      {/* Similar Solutions Section */}
+      <section className="py-16 bg-white border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold text-slate-800">
+              Similar Solutions
+            </h2>
+            <p className="text-slate-500 mt-2">
+              Discover other solutions that complement {solution.title}
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {relatedSolutions.map(([key, sol]) => {
+              const RelatedIcon = sol.icon;
+              const relatedColors = getColorClasses(sol.themeColor);
+              return (
+                <Link
+                  key={key}
+                  to={`/solutions/${key}`}
+                  className="group bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-all hover:-translate-y-1"
+                >
+                  <div
+                    className={`w-12 h-12 rounded-xl ${relatedColors.bg} flex items-center justify-center mb-4`}
                   >
-                    <ChevronRight size={14} /> Case Studies
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/resources"
-                    className="text-slate-600 text-sm hover:text-indigo-600 transition-colors flex items-center gap-1"
-                  >
-                    <ChevronRight size={14} /> Whitepapers
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/resources"
-                    className="text-slate-600 text-sm hover:text-indigo-600 transition-colors flex items-center gap-1"
-                  >
-                    <ChevronRight size={14} /> Video Demos
-                  </Link>
-                </li>
-              </ul>
-            </div>
+                    <RelatedIcon size={22} className={relatedColors.text} />
+                  </div>
+                  <h3 className="font-bold text-lg text-slate-800 group-hover:text-indigo-600 transition-colors">
+                    {sol.title}
+                  </h3>
+                  <p className="text-sm text-slate-500 mt-2 line-clamp-2">
+                    {sol.shortDescription}
+                  </p>
+                  <div className="mt-4 flex items-center gap-1 text-sm font-medium text-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Learn More <ChevronRight size={14} />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1120,49 +1278,6 @@ const SolutionDetailPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Related Solutions */}
-      <section className="py-16 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-slate-800">
-            Explore Related Solutions
-          </h2>
-          <p className="text-slate-500 mt-2">
-            Discover other modules that complement {solution.title}
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-5">
-          {Object.entries(solutionDetails)
-            .filter(([key]) => key !== id)
-            .slice(0, 3)
-            .map(([key, sol]) => {
-              const RelatedIcon = sol.icon;
-              const relatedColors = getColorClasses(sol.themeColor);
-              return (
-                <Link
-                  key={key}
-                  to={`/solutions/${key}`}
-                  className="group bg-white border border-slate-200 rounded-xl p-5 hover:shadow-lg transition-all hover:-translate-y-1"
-                >
-                  <div
-                    className={`w-12 h-12 rounded-xl ${relatedColors.bg} flex items-center justify-center mb-3`}
-                  >
-                    <RelatedIcon size={22} className={relatedColors.text} />
-                  </div>
-                  <h3 className="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">
-                    {sol.title}
-                  </h3>
-                  <p className="text-xs text-slate-500 mt-1 line-clamp-2">
-                    {sol.shortDescription}
-                  </p>
-                  <div className="mt-3 flex items-center gap-1 text-xs font-medium text-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Learn More <ChevronRight size={12} />
-                  </div>
-                </Link>
-              );
-            })}
         </div>
       </section>
     </div>
