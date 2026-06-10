@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
     { id: 1, title: 'New case assigned', message: 'Case #2024-001 has been assigned to you', time: '5 min ago', read: false, type: 'case' },
     { id: 2, title: 'Evidence uploaded', message: 'New CCTV footage available for case #2024-002', time: '1 hour ago', read: false, type: 'evidence' },
     { id: 3, title: 'Court hearing scheduled', message: 'Hearing for case #2024-003 on Dec 15', time: '3 hours ago', read: true, type: 'court' },
-    { id: 4, title: 'System update', message: 'New security patch available', time: '1 day ago', read: true, type: 'system' },
+    // { id: 4, title: 'System update', message: 'New security patch available', time: '1 day ago', read: true, type: 'system' },
   ];
 
   const unreadCount = notifications.filter(n => !n.read).length;
