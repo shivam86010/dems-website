@@ -19,7 +19,8 @@ import { BlogPage } from "./pages/BlogPage";
 import { SupportCenterPage } from "./pages/SupportCenterPage";
 import { ChangelogPage } from "./pages/ChangelogPage";
 import { BlogDetailPage } from "./pages/BlogDetailPage";
-
+import { OpinionColumnDetailPage } from "./pages/OpinionColumnDetailPage";
+import { InterviewDetailPage } from "./pages/InterviewDetailPage";
 function App() {
   return (
     <BrowserRouter>
@@ -41,6 +42,10 @@ function App() {
           <Route path="/webinars" element={<WebinarsPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:id" element={<BlogDetailPage />} />
+
+          <Route path="/opinion/:id" element={<OpinionColumnDetailPage />} />
+          <Route path="/interview/:id" element={<InterviewDetailPage />} />
+
           <Route path="/support-center" element={<SupportCenterPage />} />
           <Route path="/changelog" element={<ChangelogPage />} />
         </Route>

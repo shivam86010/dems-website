@@ -1,6 +1,6 @@
 // BlogPage.tsx - Premium Sidebar Layout with Filter Section
 import React, { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Newspaper,
   Calendar,
@@ -605,6 +605,7 @@ const BlogSidebar: React.FC<{
 // ============================================================================
 
 export const BlogPage: React.FC = () => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -954,7 +955,10 @@ export const BlogPage: React.FC = () => {
                     {col.readTime}
                   </span>
                 </div>
-                <button className="mt-3 text-sm font-bold text-blue-600 group-hover:text-blue-800 flex items-center gap-1">
+                <button
+                  onClick={() => navigate(`/opinion/${idx + 1}`)}
+                  className="mt-3 text-sm font-bold text-blue-600 group-hover:text-blue-800 flex items-center gap-1"
+                >
                   Read Column <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -1121,7 +1125,10 @@ export const BlogPage: React.FC = () => {
                 </div>
                 <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                   <span>{item.date}</span>
-                  <button className="text-sm font-bold text-blue-600 group-hover:text-blue-800 flex items-center gap-1">
+                  <button
+                    onClick={() => navigate(`/interview/${idx + 1}`)}
+                    className="text-sm font-bold text-blue-600 group-hover:text-blue-800 flex items-center gap-1"
+                  >
                     Read Interview <ArrowRight className="w-3 h-3" />
                   </button>
                 </div>

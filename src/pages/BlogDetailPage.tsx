@@ -4,15 +4,13 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Calendar,
-  User,
   Clock,
   Eye,
   Heart,
   Bookmark,
   MessageSquare,
-  Share2,
   Mail,
-  Link2,
+
   TrendingUp,
   Star,
   BookOpen,
