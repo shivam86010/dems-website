@@ -21,6 +21,8 @@ import { ChangelogPage } from "./pages/ChangelogPage";
 import { BlogDetailPage } from "./pages/BlogDetailPage";
 import { OpinionColumnDetailPage } from "./pages/OpinionColumnDetailPage";
 import { InterviewDetailPage } from "./pages/InterviewDetailPage";
+
+import { CreateCasesPage } from "./pages/features/CreateCases";
 function App() {
   return (
     <BrowserRouter>
@@ -42,12 +44,12 @@ function App() {
           <Route path="/webinars" element={<WebinarsPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:id" element={<BlogDetailPage />} />
-
           <Route path="/opinion/:id" element={<OpinionColumnDetailPage />} />
           <Route path="/interview/:id" element={<InterviewDetailPage />} />
-
           <Route path="/support-center" element={<SupportCenterPage />} />
           <Route path="/changelog" element={<ChangelogPage />} />
+
+          <Route path="/create-cases" element={<CreateCasesPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
