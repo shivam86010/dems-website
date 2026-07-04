@@ -1,8 +1,7 @@
-// ChangelogPage.tsx
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  History, GitBranch, GitMerge, RefreshCw, Zap,
+  History, GitBranch,  RefreshCw, Zap,
   Shield, Lock, Database, Server, Cpu, Layers,
   ArrowRight, CheckCircle, AlertCircle, Clock,
   Download, FileText, Code, Terminal, Users,

@@ -1,4 +1,3 @@
-// BlogDetailPage.tsx - Premium Redesign with Custom SVG Icons
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {

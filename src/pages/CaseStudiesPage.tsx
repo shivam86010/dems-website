@@ -1,17 +1,10 @@
-
-
-
-// CaseStudiesPage.tsx
 import React from "react";
 import { Link } from "react-router-dom";
 import {
   FolderLock, ArrowRight, TrendingUp, Users, Building,
-  ShieldCheck, Award, BarChart3, FileCheck, Clock,
-  Globe, Landmark, HeartPulse, Computer, Scale,
-  Briefcase, CheckCircle, Star, Target, Zap, Eye,
-  Download, ExternalLink, PlayCircle, BookOpen,
-  MessageSquare, Sparkles, ChevronRight, FileText,
-  PieChart, Activity, Layers, Lock
+  ShieldCheck, Award, Clock, Landmark, HeartPulse, Computer, Scale,
+  Briefcase, Star,
+  Download, ExternalLink, PlayCircle,  FileText,
 } from "lucide-react";
 
 export const CaseStudiesPage: React.FC = () => {

@@ -12,10 +12,6 @@ import {
   Database,
   Clock,
   Eye,
-  Download,
-  Settings,
-  Zap,
-  Lock,
 } from "lucide-react";
 
 const FeaturesPage: React.FC = () => {

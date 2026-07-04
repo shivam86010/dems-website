@@ -1,4 +1,3 @@
-// Website/pages/FeatureDetailPage.tsx
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
@@ -8,12 +7,7 @@ import {
   Users,
   BarChart3,
   Calendar,
-  Fingerprint,
-  FileText,
   Shield,
-  Database,
-  Clock,
-  Eye,
   CheckCircle2,
   ChevronRight,
   Lock,
@@ -28,10 +22,7 @@ import {
   Printer,
   BookOpen,
   Zap,
-  TrendingUp,
-  Globe,
   ThumbsUp,
-  XCircle,
   AlertTriangle,
 } from "lucide-react";
 

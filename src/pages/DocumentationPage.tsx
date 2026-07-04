@@ -1,13 +1,10 @@
-// DocumentationPage.tsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  BookOpen, Search, Terminal, Database, Shield, Zap, Layers,
-  CheckCircle, ArrowRight, ChevronRight, Download, FileCode,
-  Key, Lock, Server, Cpu, GitBranch, Code, Cloud, Globe,
-  FileCheck, Clock, Users, Settings, Box, Grid, Eye, Link2,
-  Sparkles, RefreshCw, HardDrive, Tag, AlertTriangle, BookMarked,
-  GraduationCap, Award, Briefcase, FolderTree, Network, Cpu as CpuIcon
+  BookOpen, Search, Database, Shield,  Layers,
+  CheckCircle, ArrowRight, ChevronRight, Download,
+  Key, Lock, Server,  GitBranch, Code, Cloud,  Link2,
+   HardDrive, AlertTriangle,  FolderTree, Network, Cpu as CpuIcon
 } from "lucide-react";
 
 export const DocumentationPage: React.FC = () => {
