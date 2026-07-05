@@ -23,6 +23,7 @@ import { OpinionColumnDetailPage } from "./pages/OpinionColumnDetailPage";
 import { InterviewDetailPage } from "./pages/InterviewDetailPage";
 
 import { CreateCasesPage } from "./pages/features/CreateCases";
+import AssignInvestigators from "./pages/features/AssignInvestigators";
 function App() {
   return (
     <BrowserRouter>
@@ -50,6 +51,10 @@ function App() {
           <Route path="/changelog" element={<ChangelogPage />} />
 
           <Route path="/create-cases" element={<CreateCasesPage />} />
+          <Route
+            path="/assign-investigators"
+            element={<AssignInvestigators />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
