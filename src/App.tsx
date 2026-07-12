@@ -25,6 +25,7 @@ import { InterviewDetailPage } from "./pages/InterviewDetailPage";
 import { CreateCasesPage } from "./pages/features/CreateCases";
 import AssignInvestigators from "./pages/features/AssignInvestigators";
 import CaseTimelines from "./pages/features/CaseTimelines";
+import StatusTracking from "./pages/features/StatusTracking";
 function App() {
   return (
     <BrowserRouter>
@@ -57,6 +58,7 @@ function App() {
             element={<AssignInvestigators />}
           />
           <Route path="/case-timelines" element={<CaseTimelines />} />
+          <Route path="/status-tracking" element={<StatusTracking />} />
         </Route>
       </Routes>
     </BrowserRouter>

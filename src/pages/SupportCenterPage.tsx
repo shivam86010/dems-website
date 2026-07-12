@@ -1,17 +1,15 @@
-// SupportCenterPage.tsx
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import {
-  LifeBuoy, Search, Clock, CheckCircle, Headphones,
+  LifeBuoy, Search,  CheckCircle,
   MessageSquare, FileText, Download, Shield, Lock,
-  Server, Cloud, HardDrive, AlertCircle, RefreshCw,
-  Users, Award, Zap, Target, Layers, BookOpen,
-  ArrowRight, ChevronRight, ExternalLink, Mail,
-  Phone, Globe, Settings, BarChart3, Activity
+  Server, Cloud,  AlertCircle,
+   Award, 
+  ArrowRight,  Mail,
+  Phone,
 } from "lucide-react";
 
 export const SupportCenterPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("all");
 
   return (
     <main className="min-h-screen bg-white font-sans antialiased">

@@ -1,13 +1,8 @@
-// WebinarsPage.tsx
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  Video, Calendar, Clock, Users, Play, ArrowRight,
-  CheckCircle, Star, Download, Filter, Search,
-  Monitor, Headphones, Award, BookOpen, Sparkles,
-  Zap, Target, TrendingUp, MessageSquare, Eye,
-  BarChart3, PieChart, Activity, Layers, FileText,
-  Link2, Globe, Shield, Lock
+  Video, Calendar, Clock, Users, Play, ArrowRight, Filter,  Sparkles,
+  Zap, Target,  Layers,  Shield,
 } from "lucide-react";
 
 export const WebinarsPage: React.FC = () => {
