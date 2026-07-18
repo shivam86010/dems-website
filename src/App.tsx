@@ -27,6 +27,7 @@ import AssignInvestigators from "./pages/features/AssignInvestigators";
 import CaseTimelines from "./pages/features/CaseTimelines";
 import StatusTracking from "./pages/features/StatusTracking";
 import UploadEvidence from "./pages/features/UploadEvidence";
+import EvidenceTagging from "./pages/features/EvidenceTagging";
 function App() {
   return (
     <BrowserRouter>
@@ -61,6 +62,7 @@ function App() {
           <Route path="/case-timelines" element={<CaseTimelines />} />
           <Route path="/status-tracking" element={<StatusTracking />} />
           <Route path="/upload-evidence" element={<UploadEvidence />} />
+          <Route path="/evidence-tagging" element={<EvidenceTagging />} />
         </Route>
       </Routes>
     </BrowserRouter>
