@@ -62,60 +62,9 @@ export default function EvidenceTagging() {
 
   return (
     <div className="bg-[#131316] text-[#e5e1e6] font-['Inter'] antialiased min-h-screen selection:bg-[#c4c1fb] selection:text-[#181445]">
-      {/* TopNavBar */}
-      <header
-        className={`w-full h-16 border-b border-[#47464f] shadow-sm fixed top-0 z-50 transition-all duration-300 ${isScrolled ? "bg-[#1c1b1f]/90 backdrop-blur-md" : "bg-[#1c1b1f]"}`}
-      >
-        <div className="flex justify-between items-center px-8 max-w-[1440px] mx-auto h-full">
-          <div className="flex items-center gap-8">
-            <span className="text-[24px] font-bold text-[#c4c1fb] tracking-tight">
-              SentinelForensics
-            </span>
-            <nav className="hidden md:flex items-center gap-6">
-              <a
-                className="text-[#c4c1fb] border-b-2 border-[#c4c1fb] pb-1 text-sm font-normal cursor-pointer"
-                href="#evidence-vault"
-              >
-                EvidenceVault
-              </a>
-              <a
-                className="text-[#c8c5d0] hover:text-[#c4c1fb] transition-colors text-sm font-normal cursor-pointer"
-                href="#chain-of-custody"
-              >
-                ChainOfCustody
-              </a>
-              <a
-                className="text-[#c8c5d0] hover:text-[#c4c1fb] transition-colors text-sm font-normal cursor-pointer"
-                href="#audit-logs"
-              >
-                AuditLogs
-              </a>
-              <a
-                className="text-[#c8c5d0] hover:text-[#c4c1fb] transition-colors text-sm font-normal cursor-pointer"
-                href="#lab-analysis"
-              >
-                LabAnalysis
-              </a>
-            </nav>
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="bg-[#c4c1fb] text-[#2d2a5b] px-4 py-2 rounded-xl font-['JetBrains_Mono'] text-xs font-medium hover:opacity-90 transition-all">
-              SecureUpload
-            </button>
-            <div className="flex gap-2">
-              <span className="material-symbols-outlined text-[#c8c5d0] cursor-pointer hover:text-[#c4c1fb] p-1">
-                security
-              </span>
-              <span className="material-symbols-outlined text-[#c8c5d0] cursor-pointer hover:text-[#c4c1fb] p-1">
-                notifications
-              </span>
-            </div>
-          </div>
-        </div>
-      </header>
-
+      
       {/* Main Content */}
-      <main className="pt-16">
+      <main >
         {/* Section 1: Cinematic Hero */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden border-b border-[#47464f]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(54,38,206,0.15),transparent_70%)] pointer-events-none"></div>
@@ -932,70 +881,8 @@ export default function EvidenceTagging() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#0e0e11] border-t border-[#47464f] py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-8 max-w-[1440px] mx-auto">
-          <div className="col-span-1 md:col-span-2 space-y-4">
-            <p className="font-['JetBrains_Mono'] font-bold text-[#4edea3] text-sm tracking-wider">
-              SentinelForensics
-            </p>
-            <p className="text-[#c8c5d0] text-xs max-w-sm mb-6 leading-relaxed">
-              Professional-grade Digital Evidence Management with integrated AI
-              Taxonomy and Blockchain Verification. Immutable Evidence
-              Protection since 2024.
-            </p>
-            <p className="text-[#c8c5d0] text-xs font-medium">
-              © 2026 SentinelForensics. Immutable Evidence Protection.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 pt-2 md:pt-0">
-            <p className="font-bold text-[#e5e1e6] text-sm mb-2 tracking-wide">
-              Compliance
-            </p>
-            <a
-              className="text-[#c8c5d0] text-xs hover:text-[#e5e1e6] underline transition-all w-fit"
-              href="#iso"
-            >
-              ISO/IEC 27001
-            </a>
-            <a
-              className="text-[#c8c5d0] text-xs hover:text-[#e5e1e6] underline transition-all w-fit"
-              href="#gdpr"
-            >
-              GDPR Compliance
-            </a>
-            <a
-              className="text-[#c8c5d0] text-xs hover:text-[#e5e1e6] underline transition-all w-fit"
-              href="#nist"
-            >
-              NIST Framework
-            </a>
-          </div>
-          <div className="flex flex-col gap-3 pt-2 md:pt-0">
-            <p className="font-bold text-[#e5e1e6] text-sm mb-2 tracking-wide">
-              Resources
-            </p>
-            <a
-              className="text-[#c8c5d0] text-xs hover:text-[#e5e1e6] underline transition-all w-fit"
-              href="#docs"
-            >
-              API Documentation
-            </a>
-            <a
-              className="text-[#c8c5d0] text-xs hover:text-[#e5e1e6] underline transition-all w-fit"
-              href="#disclaimer"
-            >
-              Legal Disclaimer
-            </a>
-            <a
-              className="text-[#c8c5d0] text-xs hover:text-[#e5e1e6] underline transition-all w-fit"
-              href="#status"
-            >
-              System Status
-            </a>
-          </div>
-        </div>
-      </footer>
+      
+      
     </div>
   );
 }

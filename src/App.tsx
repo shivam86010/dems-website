@@ -28,6 +28,8 @@ import CaseTimelines from "./pages/features/CaseTimelines";
 import StatusTracking from "./pages/features/StatusTracking";
 import UploadEvidence from "./pages/features/UploadEvidence";
 import EvidenceTagging from "./pages/features/EvidenceTagging";
+import VersionControl from "./pages/features/VersionControl";
+import SecureStorage from "./pages/features/SecureStorage";
 function App() {
   return (
     <BrowserRouter>
@@ -63,6 +65,8 @@ function App() {
           <Route path="/status-tracking" element={<StatusTracking />} />
           <Route path="/upload-evidence" element={<UploadEvidence />} />
           <Route path="/evidence-tagging" element={<EvidenceTagging />} />
+          <Route path="/version-control" element={<VersionControl />} />
+          <Route path="/secure-storage" element={<SecureStorage />} />
         </Route>
       </Routes>
     </BrowserRouter>
